@@ -8,26 +8,42 @@ function Recommendation(props) {
             <tbody>
                 <tr>
                     <td>
-                        <b>Recommendor Name</b>
+                        <b>Refree Name</b>
                     </td>
                     <td>
-                        {props.recommendation.name}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <b>Working Title</b>
-                    </td>
-                    <td>
-                        {props.recommendation.workingTitle}
+                        {props.recommendation.refreename}
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <b>Recommendation</b>
+                        <b>Refree Job Title</b>
                     </td>
                     <td>
-                        {props.recommendation.text}
+                        {props.recommendation.refreejobtitle}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Refree Company</b>
+                    </td>
+                    <td>
+                        {props.recommendation.refreecompany}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Referral Date</b>
+                    </td>
+                    <td>
+                        {props.recommendation.refrraldate}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Referral Text</b>
+                    </td>
+                    <td>
+                        {props.recommendation.reffraltext}
                     </td>
                 </tr>
             </tbody>

@@ -1,29 +1,26 @@
 import React from 'react'
 import Recommendation from './Recommendation'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
 function Recommendations() {
-    const recommendations = [
-        {
-            name: "Mr. Devendra Singh",
-            workingTitle: "Front End Developer",
-            text: "Amit has many outstanding qualities that make him a perfect candidate for this position.Amit has finished several projects in our organization"
-        },
-        {
-            name: "Mr. Anil Kumar",
-            workingTitle: "Technical Lead",
-            text: "Amit is an exemplary employee and an outstanding role model for his peers"
-        },
-        {
-            name: "Mr. Raghvendra Singh",
-            workingTitle: "Solution Architect",
-            text: "Amit acted as a technical resource person,a responsibility that required his constant assistance of end users in ICT related matters"
-        },
-        {
-            name: "Mr. Rajesh Kumar",
-            workingTitle: "Project Manager",
-            text: "Amit was an apt leaner who adjusts quickly to his environment,he tackled his assignments with dedication, minimal supervision and pleasant"
+    const [recommendation, setRecommendation] = useState([])
+
+    
+      useEffect(() => {
+        async function fetchUser() {
+          const response = await axios({
+            url: "http://localhost:8080/api/user/getrecommendations",
+            method: "GET",
+            params: {
+              userId: localStorage.getItem('userId')
+            }
+          })
+          setRecommendation(response.data.recommendations);
         }
-    ]
+        fetchUser()
+    
+      },[])
 
     return (
         <div className='row mt-5'>
@@ -32,7 +29,7 @@ function Recommendations() {
             </div>
             <div className='col-md-8' style={{ textAlign: 'left' }}>
                 <h1 className='text-center mb-4'>Recommendations</h1>
-                {recommendations.map((recommendation, index) => {
+                {recommendation.map((recommendation, index) => {
                     return (
                         <Recommendation recommendation={recommendation} key={index}></Recommendation>
                     )

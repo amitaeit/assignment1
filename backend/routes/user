@@ -1,0 +1,133 @@
+const express = require('express');
+const User = require('../model/User');
+const Recommendation = require('../model/Recommendation');
+const Job = require('../model/Job');
+
+
+const router = express.Router();
+
+router.post('/create', async (req, resp) => {
+    try {
+        let user = await User.findOne({ userId: req.body.userid })
+        if (user) {
+            return resp.send({ respCode: 3, respMsg: "User already exists" });
+        }
+        user = await User.create({
+            userId: req.body.userId,
+            name: req.body.name,
+            role: req.body.role,
+            email: req.body.email,
+            contactno: req.body.contactno,
+            password: req.body.password,
+            about: req.body.about
+        })
+        console.log(user)
+        resp.send({ respCode: 1, respMsg: "User created successfully" });
+    }
+    catch (error) {
+        console.log(error);
+        resp.send({ respCode: 4, respMsg: "Error creating user" });
+    }
+})
+
+
+router.post('/update', async (req, resp) => {
+
+    try {
+        let user = await User.findOneAndUpdate(
+            { userId: req.body.userId },
+            {
+                $set: {
+                    name: req.body.name,
+                    email: req.body.email,
+                    contactno: req.body.contactno,
+                    password: req.body.password,
+                    about: req.body.about
+                }
+            })
+        resp.send({ respCode: 1, respMsg: "User updated successfully" });
+    }
+    catch (error) {
+        console.log(error);
+        resp.send({ respCode: 4, respMsg: "Error updating user" });
+    }
+})
+
+router.get('/login', async (req, resp) => {
+    console.log(req.query.userId)
+    const userId = req.query.userId;
+
+    try {
+        const user = await User.findOne({ userId });
+        if (user) {
+            if (user.password === req.query.password) {
+                console.log(user);
+                resp.send({ code: "1", message: "login successful", role: user.role });
+            }
+            else {
+                resp.send({ code: "2", message: "login failed" })
+            }
+        }
+        else {
+            resp.send({ code: "3", message: "User not found" });
+        }
+    }
+    catch (err) {
+        resp.send({ code: "4", message: err })
+    }
+})
+
+router.get('/getuser', async (req, resp) => {
+    console.log(req.query.userId)
+    const userId = req.query.userId;
+
+    try {
+        const user = await User.findOne({ userId });
+        if (user) {
+            console.log(user);
+            resp.send({ code: "1", message: "login successful", user:user});
+        }
+        else {
+            resp.send({ code: "3", message: "User not found" });
+        }
+    }
+    catch (err) {
+        resp.send({ code: "4", message: err })
+    }
+})
+
+router.get('/getjobs', async (req, resp) => {
+    console.log(req.query.userId)
+    const userId = req.query.userId;
+
+    try {
+        const jobs = await Job.find({ userId });
+        if (jobs) {
+            console.log(jobs);
+            resp.send({ code: "1",  jobs:jobs});
+        }
+    }
+    catch (err) {
+        resp.send({ code: "2", message: err })
+    }
+})
+
+router.get('/getrecommendations', async (req, resp) => {
+    console.log(req.query.userId)
+    const userId = req.query.userId;
+
+    try {
+        const recommendations = await Recommendation.find({ userId });
+        if (recommendations) {
+            console.log(recommendations);
+            resp.send({ code: "1", recommendations: recommendations});
+        }
+    }
+    catch (err) {
+        resp.send({ code: "2", message: err })
+    }
+})
+
+
+module.exports = router;
+

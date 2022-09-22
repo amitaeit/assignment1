@@ -4,6 +4,7 @@ function Aboutme(props) {
     return (
 
         <div className='row mt-5'>
+            
             <div className='col-md-4'>
                 <img className='img-fluid mt-5' src='pic.jpg' alt="aboutme"></img>
             </div>
@@ -25,22 +26,6 @@ function Aboutme(props) {
                             </td>
                             <td>
                                 {props.person.about}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <b>Skills</b>
-                            </td>
-                            <td>
-                                {props.person.skills}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <b>Experience</b>
-                            </td>
-                            <td>
-                                {props.person.experience}
                             </td>
                         </tr>
                     </tbody>

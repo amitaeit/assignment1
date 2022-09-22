@@ -32,7 +32,7 @@ function Contactme(props) {
                                 <b>Phone</b>
                             </td>
                             <td>
-                                {props.contactDetail.phone}
+                                {props.contactDetail.contactno}
                             </td>
                         </tr>
                         <tr>

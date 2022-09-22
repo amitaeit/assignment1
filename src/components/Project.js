@@ -6,10 +6,18 @@ function Project(props) {
     <tbody>
         <tr>
             <td>
-                <b>Position</b>
+                <b>Company</b>
             </td>
             <td>
-                {props.project.position}
+                {props.project.company}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Title</b>
+            </td>
+            <td>
+                {props.project.title}
             </td>
         </tr>
         <tr>
@@ -22,18 +30,10 @@ function Project(props) {
         </tr>
         <tr>
             <td>
-                <b>Company</b>
+                <b>Project</b>
             </td>
             <td>
-                {props.project.company}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <b>Description</b>
-            </td>
-            <td>
-                {props.project.desc}
+                {props.project.project}
             </td>
         </tr>
     </tbody>
